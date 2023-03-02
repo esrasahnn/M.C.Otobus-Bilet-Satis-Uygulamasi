@@ -1,0 +1,72 @@
+﻿@model BusTripsDto
+
+<h1>Sefer Bilgisi Ekleme</h1>
+
+<div class="row">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        @if (ViewBag.ErrorMessage != null)
+        {
+            @MessageHelper.DisplayError(ViewBag.ErrorMessage)
+        }
+
+        <form asp-controller="BusTrips" asp-action="Create" method="post">
+            <div class="mb-3">
+                <label asp-for="VehicleId"  class="form-label">Araç</label>
+                <select asp-for="VehicleId" asp-items="ViewBag.VehicleList" class="form-select">
+                    <option value="">Lütfen Seçiniz</option>
+                </select>
+            </div>
+               <div class="mb-3">
+                <label asp-for="DepartureCityId" class="form-label">Kalkış Şehri</label>
+                <select asp-for="DepartureCityId" asp-items="ViewBag.DepartureCityList" class="form-select"></select>
+            </div>
+             <div class="mb-3">
+                <label asp-for="ArrivalCityId" class="form-label">Varış Şehri</label>
+                <select asp-for="ArrivalCityId" asp-items="ViewBag.ArrivalCityList" class="form-select"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Date" class="form-label">Tarih</label>
+
+                <input asp-for="Date" placeholder="Lütfen Bir Tarih Seçin" class="form-select" style="background-color:white" />
+            </div>
+           @* <div class="mb-3">
+                <label for="start" class="form-label">Tahmini Varış Süresi</label>
+                <input type="text" id="estimadDuration" name="estimadDuration" class="form-control" />
+            </div>*@
+             <div class="mb-3">
+                <label asp-for="EstimatedDuration" class="form-label">Tahmini Süre(dk)</label>
+                <input asp-for="EstimatedDuration" type="text" class="form-control"></input>
+            </div>
+            <div class="mb-3">
+                <label asp-for="TicketPrice" class="form-label">Bilet Fiyatı</label>
+                <input asp-for="TicketPrice" type="text" class="form-control"></input>
+            </div>
+            <div class="mb-3">
+                <label asp-for="BreakTimeDuration" class="form-label">Mola Süresi(dk)</label>
+                <input asp-for="BreakTimeDuration" type="text" class="form-control"></input>
+            </div>
+            @*<div class="mb-3">
+                <label for="start" class="form-label">Bilet Fiyatı</label>
+                <input type="text" id="ticketPrice" name="ticketPrice" class="form-control"/>
+            </div>*@
+            <div class="mb-12">
+                <div class="float-end">
+                    <a class="btn btn-outline-warning" asp-action="Index">İptal</a>
+                    <button class="btn btn-outline-success" type="submit">
+                        Kaydet
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        document.getElementById('Date').flatpickr({
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                time_24hr: true
+        });
+    </script>
+}
